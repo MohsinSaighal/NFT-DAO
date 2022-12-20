@@ -2,7 +2,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Navbar";
 import ListNft from "./ListNft.js";
 import Create from "./Create.js";
+import Vote from "./Vote.js";
 import Home from "./Home.js";
+import MyListedItems from "./MyListedItem.js";
+import MyPurchases from "./MyPurchases";
+import MarketplaceAbi from "../contractsData/NftMarketplace.json";
+import MarketplaceAddress from "../contractsData/NftMarketplace-address.json";
+import NFTAddress from "../contractsData/MyToken-address.json";
+import NFTAbi from "../contractsData/MyToken.json";
+
 import { useState } from "react";
 import { ethers } from "ethers";
 import { Spinner } from "react-bootstrap";
@@ -14,7 +22,6 @@ function App() {
   const [account, setAccount] = useState(null);
   const [nft, setNFT] = useState({});
 
-  const [data, setData] = useState();
   const [state, setState] = useState(false);
   const [marketplace, setMarketplace] = useState({});
   // MetaMask Login/Connect
@@ -42,14 +49,14 @@ function App() {
   };
   const loadContracts = async (signer) => {
     // Get deployed copies of contracts
-    // const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer);
-    // const Marketplace = new ethers.Contract(
-    //   MarketplaceAddress.address,
-    //   MarketplaceAbi.abi,
-    //   signer
-    // );
+    const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer);
+    const Marketplace = new ethers.Contract(
+      MarketplaceAddress.address,
+      MarketplaceAbi.abi,
+      signer
+    );
     setNFT(nft);
-    //setMarketplace(Marketplace);
+    setMarketplace(Marketplace);
     setLoading(false);
   };
 
@@ -75,15 +82,29 @@ function App() {
           ) : (
             <Routes>
               <Route
+                path="/Vote"
+                element={
+                  <Vote marketplace={marketplace} nft={nft} state={state} />
+                }
+              />
+              <Route
                 path="/"
                 element={
                   <Home marketplace={marketplace} nft={nft} state={state} />
                 }
               />
-              {/* <Route
-                path="/lazyMinting"
-                element={<LazyMinting marketplace={marketplace} nft={nft} />}
-              /> */}
+              <Route
+                path="/MyListedItems"
+                element={
+                  <MyListedItems
+                    marketplace={marketplace}
+                    nft={nft}
+                    state={state}
+                    account={account}
+                  />
+                }
+              />
+
               <Route
                 path="/create"
                 element={<Create marketplace={marketplace} nft={nft} />}
@@ -98,15 +119,16 @@ function App() {
                   />
                 }
               />
-              {/* <Route
-                path="/my-purchases"
+              <Route
+                path="/MyPurchases"
                 element={
                   <MyPurchases
                     marketplace={marketplace}
                     nft={nft}
                     account={account}
-                  /> */}
-              } />
+                  />
+                }
+              />
             </Routes>
           )}
         </div>

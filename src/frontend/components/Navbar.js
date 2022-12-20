@@ -12,14 +12,23 @@ const Navigation = ({ web3Handler, account }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/Vote">
               Vote
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Home
             </Nav.Link>
             <Nav.Link as={Link} to="/create">
               Admin
             </Nav.Link>
             <Nav.Link as={Link} to="/ListNft">
               ListNft
+            </Nav.Link>
+            <Nav.Link as={Link} to="/MyListedItems">
+              MyListed NFT
+            </Nav.Link>
+            <Nav.Link as={Link} to="/MyPurchases">
+              MyPurchases
             </Nav.Link>
           </Nav>
           <Nav>

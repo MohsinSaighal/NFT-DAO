@@ -13,7 +13,6 @@ const Create = () => {
   const [amount, setAmount] = useState(null);
   const [description, setDescription] = useState("");
   const [encodeFunction, setEncodedFunction] = useState("");
-  console.log(description);
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const transferToken = async () => {
