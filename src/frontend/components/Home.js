@@ -11,12 +11,6 @@ const Home = ({ marketplace, nft }) => {
     let items = [];
     for (let i = 1; i <= itemCount; i++) {
       const item = await marketplace.items(i);
-      const prices = item.price.toString();
-      console.log(prices);
-      const nftprice = ethers.utils.formatEther(prices);
-      console.log(nftprice);
-      const price = ethers.utils.formatEther(item.price.toString());
-      console.log(price);
       if (!item.sold) {
         // get uri url from nft contract
         const uri = await nft.tokenURI(item.tokenId);
@@ -42,7 +36,6 @@ const Home = ({ marketplace, nft }) => {
   const buyMarketItem = async (item) => {
     const prices = item.price.toString();
     const tokenId = item.itemId.toString();
-    console.log(prices);
     await (
       await marketplace.purchaseItem(tokenId, {
         value: prices,

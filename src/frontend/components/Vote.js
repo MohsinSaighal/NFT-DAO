@@ -153,7 +153,7 @@ const Home = () => {
                   size="lg"
                   required
                   type="number"
-                  placeholder="Proposal Id"
+                  placeholder="Enter Description of Proposal"
                 />
                 <Form.Control
                   onChange={(e) => setReason(e.target.value)}
