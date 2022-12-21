@@ -1,4 +1,4 @@
-# Governance-Dapp
+# NFT-GOVERNANCE-DAO
 
 ## Technology Stack & Tools
 
@@ -22,7 +22,7 @@ $ npm install
 ```
 ### 3. Boot up local development blockchain
 ```
-$ cd nft_marketplace
+$ cd pathname
 $ npx hardhat node
 ```
 
