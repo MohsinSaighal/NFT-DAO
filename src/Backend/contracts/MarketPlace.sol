@@ -159,7 +159,6 @@ contract NftMarketplace is ReentrancyGuard, Ownable {
         uint256 price
     )
         external
-        notListed(nftAddress, tokenId, msg.sender)
     //isOwner(nftAddress, tokenId, msg.sender)
     {
         itemCount++;
@@ -202,7 +201,10 @@ contract NftMarketplace is ReentrancyGuard, Ownable {
      * @param nftAddress Address of NFT contract
      * @param tokenId Token ID of NFT
      */
-    function cancelListing(address nftAddress, uint256 tokenId)
+    function cancelListing(
+        address nftAddress,
+        uint256 tokenId
+    )
         external
         isOwner(nftAddress, tokenId, msg.sender)
         isListed(nftAddress, tokenId)

@@ -152,7 +152,7 @@ const Home = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   size="lg"
                   required
-                  type="number"
+                  type="text"
                   placeholder="Enter Description of Proposal"
                 />
                 <Form.Control

@@ -12,14 +12,14 @@ export default function MyPurchases({ marketplace, nft, account }) {
     // Set signer
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    const itemCount = await marketplace.itemCount();
+    const itemCount = await nft.tokenCount();
     let soldItems = [];
     for (let indx = 1; indx <= itemCount; indx++) {
-      const i = await marketplace.items(indx);
-      const owner = await nft.ownerOf(i.itemId);
-      if (i.sold === true && owner === address) {
+      const i = await nft.tokenCount();
+      const owner = await nft.ownerOf(i);
+      if (owner === address) {
         // get uri url from nft contract
-        const uri = await nft.tokenURI(i.itemId);
+        const uri = await nft.tokenURI(i);
         // use uri to fetch the nft metadata stored on ipfs
         const response = await fetch(uri);
         const metadata = await response.json();
@@ -27,7 +27,7 @@ export default function MyPurchases({ marketplace, nft, account }) {
         // define listed item object
         let item = {
           price: i.price,
-          itemId: i.itemId,
+          itemId: i,
           name: metadata.name,
           description: metadata.description,
           image: metadata.image,
@@ -40,7 +40,6 @@ export default function MyPurchases({ marketplace, nft, account }) {
     setSoldItems(soldItems);
   };
   const SellItem = async (item) => {
-    console.log(item);
     let ABI = [
       "function listItem(address nftAddress,uint256 tokenId,uint256 price)external",
     ];
