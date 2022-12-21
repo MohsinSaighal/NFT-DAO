@@ -55,7 +55,7 @@ const Create = () => {
         [MarketplaceAddress.address],
         [0],
         [encodedFunction],
-        "Release Funds from Treasury"
+        description
       )
     ).wait();
     const id = tx.events[0].args.proposalId;

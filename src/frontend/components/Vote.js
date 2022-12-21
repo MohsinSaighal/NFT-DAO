@@ -17,6 +17,7 @@ const Home = () => {
   const [value, setValue] = useState();
   const [id, setId] = useState(null);
   const [reason, setReason] = useState("");
+  const [description, setDescription] = useState("");
   const [encodeFunction, setEncodedFunction] = useState("");
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -74,7 +75,7 @@ const Home = () => {
       `Current state of proposal: ${proposalState.toString()} (Succeeded) \n`
     );
     // Queue
-    const hash = ethers.utils.id("Release Funds from Treasury");
+    const hash = ethers.utils.id(description);
     const encodedFunction = encodeFunction;
     await (
       await governance.queue(
@@ -142,6 +143,13 @@ const Home = () => {
                 </RadioGroup>
                 <Form.Control
                   onChange={(e) => setId(e.target.value)}
+                  size="lg"
+                  required
+                  type="number"
+                  placeholder="Proposal Id"
+                />
+                <Form.Control
+                  onChange={(e) => setDescription(e.target.value)}
                   size="lg"
                   required
                   type="number"

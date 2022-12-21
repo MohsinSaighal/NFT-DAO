@@ -12,8 +12,7 @@ function renderSoldItems(items) {
             <Card>
               <Card.Img variant="top" src={item.image} />
               <Card.Footer>
-                For {ethers.utils.formatEther(item.totalPrice)} ETH - Recieved{" "}
-                {ethers.utils.formatEther(item.price)} ETH
+                {ethers.utils.formatEther(item.price.toString())} ETH
               </Card.Footer>
             </Card>
           </Col>
