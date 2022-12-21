@@ -1,4 +1,4 @@
-# Governance-Dapp
+# NFT-GOVERNANCE-DAO
 
 ## Technology Stack & Tools
 
